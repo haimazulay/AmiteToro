@@ -28,6 +28,7 @@ namespace eToroLandingPage.Tests
         [Test]
         public void TestNumber002Desktop()
         {
+
             BrowseToUrl(websiteUrl);
             PageSpeedInsightsPage Insights = new PageSpeedInsightsPage(driver);
             Insights.EnterWebPageUrl();
