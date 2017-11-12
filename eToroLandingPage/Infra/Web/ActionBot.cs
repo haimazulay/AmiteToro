@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.Extensions;
+using static System.Threading.Thread;
 
 namespace eToroLandingPage.Infra.Web
 {
@@ -33,28 +37,15 @@ namespace eToroLandingPage.Infra.Web
             element.SendKeys(text);
         }
 
-        public bool ExtractValueToString(By by, By greatMessage)
+        public void WaitUntilVisible(By by)
         {
-            IsVisuble(greatMessage);
-            IWebElement element = driver.FindElement(by);
-            string result = element.Text;
-            result = result.Remove(2);
-            int a = Convert.ToInt32(result);
-            return (a >= 80 ? true : false);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            wait.Until(ExpectedConditions.ElementToBeClickable(by));
+
         }
 
-
-
-
-        public void IsVisuble(By by)
-        {
-            new WebDriverWait(driver, TimeSpan.FromSeconds(timeOut)).Until(ExpectedConditions.ElementExists((by)));
-        }
-
-        public void WaitForElementVisibility(By by)
-        {
-            webDriverWait.Until(ExpectedConditions.ElementIsVisible(by));
-        }
 
     }
 }

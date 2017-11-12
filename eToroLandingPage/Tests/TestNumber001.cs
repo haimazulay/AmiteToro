@@ -20,27 +20,20 @@ namespace eToroLandingPage.Tests
             PageSpeedInsightsPage Insights = new PageSpeedInsightsPage(driver);
             Insights.EnterWebPageUrl();
             MobileTab mobileTab = Insights.ClickOnAnalyzeBtn();
-            bool result = mobileTab.GetScore();
-                Assert.IsTrue(result);
+            int result = mobileTab.GetScoreForMobile();
+            Assert.GreaterOrEqual(result, 80, "Score should be >= 80");
         }
-
 
         [Test]
         public void TestNumber002Desktop()
         {
-
             BrowseToUrl(websiteUrl);
             PageSpeedInsightsPage Insights = new PageSpeedInsightsPage(driver);
             Insights.EnterWebPageUrl();
             MobileTab mobileTab = Insights.ClickOnAnalyzeBtn();
-
             DesktopTab desktopTab = mobileTab.ClickOnDesktopTab();
-            bool result = mobileTab.GetScore();
-            Assert.IsTrue(result);
+            int result = desktopTab.GetScoreForDesktop();
+            Assert.GreaterOrEqual(result, 80, "Score should be >= 80");
         }
-
-
-
-
     }
 }

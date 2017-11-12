@@ -9,12 +9,12 @@ namespace eToroLandingPage.Infra.Web.Pages
 {
     public class MobileTab : AbstractPage
     {
-        private static readonly By mobileScore = By.ClassName("result-group-title-card-score");
+        private static readonly By score = By.XPath("//p[@class='result-group-title-card-score']");
         private static readonly By desktopTab = By.XPath("//*[@id=':l']/div/div[2]");
         private static readonly By greatJobMessage = By.ClassName("result-group-title-message");
 
 
-        public MobileTab(IWebDriver driver) : base(driver, new By[] { mobileScore, greatJobMessage })
+        public MobileTab(IWebDriver driver) : base(driver, new By[] { score, greatJobMessage })
         { }
 
         public DesktopTab ClickOnDesktopTab()
@@ -23,11 +23,14 @@ namespace eToroLandingPage.Infra.Web.Pages
             return new DesktopTab(driver);
         }
 
-        public bool GetScore()
+        public int GetScoreForMobile()
         {
-            return bot.ExtractValueToString(mobileScore, greatJobMessage);
+            bot.WaitUntilVisible(greatJobMessage);
+            List<IWebElement> scoreElements = driver.FindElements(score).ToList();
+            string strScore = scoreElements[0].Text;
+            strScore = strScore.Split('/')[0];
+            int intScore = Convert.ToInt32(strScore);
+            return intScore;
         }
-
-
     }
 }

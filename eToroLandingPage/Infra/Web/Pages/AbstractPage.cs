@@ -28,12 +28,14 @@ namespace eToroLandingPage.Infra.Web.Pages
             }
         }
 
+
+
         private void VerifyOnPage()
         {
 
             foreach (By by in pageUniqueElementsBy)
             {
-                bot.WaitForElementVisibility(by);
+                bot.WaitUntilVisible(by);
             }
         }
 
