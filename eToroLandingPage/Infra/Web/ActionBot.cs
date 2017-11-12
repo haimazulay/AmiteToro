@@ -10,6 +10,7 @@ namespace eToroLandingPage.Infra.Web
 {
     public class ActionBot
     {
+
         private IWebDriver driver;
         private WebDriverWait webDriverWait; // explicit wait
         private double timeOut;
